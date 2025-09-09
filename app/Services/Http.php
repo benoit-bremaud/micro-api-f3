@@ -1,5 +1,5 @@
 <?php
-namespace Services;
+namespace App\Services;
 
 final class Http {
     public static function ok($data): void {
