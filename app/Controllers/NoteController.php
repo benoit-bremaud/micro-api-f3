@@ -19,27 +19,27 @@ class NoteController {
     $f3 = Base::instance();
     $limit = (int)($f3->get('GET.limit') ?? 50);
     $offset= (int)($f3->get('GET.offset') ?? 0);
-    echo json_encode($this->notes->allByUser($this->userId,$limit,$offset));
+    Http::ok($this->notes->allByUser($this->userId,$limit,$offset));
   }
   public function show($f3, $params) {
     $note = $this->notes->find($this->userId, (int)$params['id']);
-    if (!$note) { http_response_code(404); echo json_encode(['error'=>'not found']); return; }
-    echo json_encode($note);
+    if (!$note) { Http::error(404, 'not found', 'Note not found'); return; }
+    Http::ok($note);
   }
   public function store() {
     $in = json_decode(file_get_contents('php://input'), true) ?? [];
-    if (!isset($in['title']) || trim($in['title'])==='') { http_response_code(422); echo json_encode(['error'=>'title required']); return; }
-    echo json_encode($this->notes->create($this->userId, $in));
+    if (!isset($in['title']) || trim($in['title'])==='') { Http::error(422, 'validation failed', 'Title is required'); return; }
+    Http::created($this->notes->create($this->userId, $in));
   }
   public function update($f3, $params) {
     $in = json_decode(file_get_contents('php://input'), true) ?? [];
     $note = $this->notes->update($this->userId, (int)$params['id'], $in);
-    if (!$note) { http_response_code(404); echo json_encode(['error'=>'not found']); return; }
-    echo json_encode($note);
+    if (!$note) { Http::error(404, 'not found', 'Note not found'); return; }
+    Http::ok($note);
   }
   public function destroy($f3, $params) {
     $ok = $this->notes->delete($this->userId, (int)$params['id']);
-    if (!$ok) { http_response_code(404); echo json_encode(['error'=>'not found']); return; }
-    echo json_encode(['deleted'=>true]);
+    if (!$ok) { Http::error(404, 'not found', 'Note not found'); return; }
+    Http::ok(['deleted'=>true]);
   }
 }

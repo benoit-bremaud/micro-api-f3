@@ -11,6 +11,7 @@ class AuthController {
     $input = json_decode(file_get_contents('php://input'), true) ?? [];
     $email = strtolower(trim($input['email'] ?? ''));
     $pass = (string)($input['password'] ?? '');
+    
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($pass) < 6) {
       Http::error(422, 'validation failed', 'Invalid email or weak password');
       return;
@@ -21,7 +22,7 @@ class AuthController {
     }
     $user = $this->users->create($email, password_hash($pass, PASSWORD_DEFAULT));
     $token = AuthService::tokenFor((int)$user['id']);
-    Http::ok(['token'=>$token,'user'=>$user]);
+    Http::created(['user'=>$user]);
   }
 
   public function login() {
@@ -29,6 +30,7 @@ class AuthController {
     $email = strtolower(trim($input['email'] ?? ''));
     $pass = (string)($input['password'] ?? '');
     $row = (new UserModel(Base::instance()->get('DB')))->findByEmail($email);
+
     if (!$row || !password_verify($pass, $row['password_hash'])) {
       Http::error(401, 'unauthorized', 'Invalid credentials');
       return;
