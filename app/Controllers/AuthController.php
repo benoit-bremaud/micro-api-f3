@@ -22,7 +22,7 @@ class AuthController {
     }
     $user = $this->users->create($email, password_hash($pass, PASSWORD_DEFAULT));
     $token = AuthService::tokenFor((int)$user['id']);
-    Http::created(['user'=>$user]);
+    Http::created(['token'=>$token, 'user'=>$user]);
   }
 
   public function login() {
