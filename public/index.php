@@ -7,13 +7,15 @@ $config = require __DIR__.'/../config/config.php';
 $f3->set('DEBUG', $config['debug']);
 $f3->set('AUTOLOAD', 'app/');
 
-// DB SQLite (fichier local)
+// DB SQLite
 $dbPath = __DIR__.'/../data/app.db';
 $f3->set('DB', new DB\SQL('sqlite:'.$dbPath));
 $f3->set('JWT_SECRET', $config['jwt_secret']);
 
-// Réponses JSON + CORS dev
+// JSON par défaut
 header('Content-Type: application/json');
+
+// CORS minimal (pour tests front)
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Authorization, Content-Type');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');

@@ -4,38 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3dbdaa7b18e4516a09e43ac817033277",
+    "content-hash": "c1eb97776088a748bc4f52780c29e950",
     "packages": [
-        {
-            "name": "bcosca/fatfree",
-            "version": "3.9.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bcosca/fatfree.git",
-                "reference": "2c6a090930f06fd1e8360920a55c0476f5961ef0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bcosca/fatfree/zipball/2c6a090930f06fd1e8360920a55c0476f5961ef0",
-                "reference": "2c6a090930f06fd1e8360920a55c0476f5961ef0",
-                "shasum": ""
-            },
-            "require": {
-                "bcosca/fatfree-core": "^3.8"
-            },
-            "type": "project",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0"
-            ],
-            "description": "A powerful yet easy-to-use PHP micro-framework designed to help you build dynamic and robust Web applications - fast!",
-            "homepage": "http://fatfreeframework.com/",
-            "support": {
-                "issues": "https://github.com/bcosca/fatfree/issues",
-                "source": "https://github.com/bcosca/fatfree/tree/3.9.1"
-            },
-            "time": "2025-08-09T12:50:26+00:00"
-        },
         {
             "name": "bcosca/fatfree-core",
             "version": "3.9.1",
