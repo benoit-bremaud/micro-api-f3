@@ -1,0 +1,22 @@
+services:
+  php:
+    build: .               # construit l'image à partir du Dockerfile présent dans le dossier courant
+    volumes:
+      - .:/var/www/html    # monte le code de l'application dans le conteneur PHP
+    environment:
+      - "TZ=Europe/Paris"  # timezone, si nécessaire
+    networks:
+      - f3net
+
+  nginx:
+    image: nginx:stable    # utilise l'image Nginx officielle
+    ports:
+      - "8000:80"          # publie le port 80 du conteneur sur le port 8000 de l’hôte
+    volumes:
+      - .:/var/www/html    # monte les fichiers de l'application (pour servir les assets éventuels)
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf:ro  # utilise notre config Nginx
+    networks:
+      - f3net
+
+networks:
+  f3net:
