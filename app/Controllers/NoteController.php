@@ -1,5 +1,9 @@
 <?php
-namespace Controllers; use Base; use Models\NoteModel; use Services\AuthService;
+namespace Controllers;
+use Base;
+use Models\NoteModel;
+use Services\AuthService;
+use Services\Http;
 
 class NoteController {
   private NoteModel $notes; private ?int $userId = null;
@@ -8,7 +12,7 @@ class NoteController {
   // Hook appelé avant chaque action du contrôleur
   public function beforeroute() {
     $this->userId = AuthService::userIdOrNull();
-    if (!$this->userId) { http_response_code(401); echo json_encode(['error'=>'unauthorized']); exit; }
+    if (!$this->userId) { Http::error(401, 'unauthorized', 'Token missing or invalid'); exit; }
   }
 
   public function index() {
