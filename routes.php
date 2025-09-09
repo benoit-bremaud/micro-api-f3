@@ -1,14 +1,14 @@
 <?php
-// Route de santé (health check)
+// Health (non protégé)
 $f3->route('GET /', function() {
-    echo json_encode(['ok' => true]);
+  echo json_encode(['ok'=>true]);
 });
 
-// Routes d'authentification (publiques)
+// Auth (public)
 $f3->route('POST /auth/register', 'Controllers\\AuthController->register');
 $f3->route('POST /auth/login',    'Controllers\\AuthController->login');
 
-// Routes des notes (protégées via le hook beforeroute du contrôleur NoteController)
+// Notes (protégées via beforeroute dans le contrôleur)
 $f3->route('GET    /api/v1/notes',        'Controllers\\NoteController->index');
 $f3->route('GET    /api/v1/notes/@id',    'Controllers\\NoteController->show');
 $f3->route('POST   /api/v1/notes',        'Controllers\\NoteController->store');
