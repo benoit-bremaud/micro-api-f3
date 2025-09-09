@@ -1,6 +1,4 @@
 # Micro API F3
-# Micro API F3
-
 Mini API REST construite avec le framework [Fat-Free (F3)](https://fatfreeframework.com/), utilisant SQLite et conteneurisée avec Docker. Le projet inclut une authentification JWT et un CRUD de notes.
 
 ## Prérequis
