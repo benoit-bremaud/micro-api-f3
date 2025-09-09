@@ -1,5 +1,9 @@
 <?php
-namespace Controllers; use Base; use Models\UserModel; use Services\AuthService; use App\Services\Http; 
+namespace Controllers;
+use Base;
+use Models\UserModel;
+use Services\AuthService;
+use Services\Http;
 
 class AuthController {
   private UserModel $users;

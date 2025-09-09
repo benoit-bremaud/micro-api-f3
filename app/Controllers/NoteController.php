@@ -3,7 +3,7 @@ namespace Controllers;
 use Base;
 use Models\NoteModel;
 use Services\AuthService;
-use App\Services\Http;
+use Services\Http;
 
 class NoteController {
   private NoteModel $notes; private ?int $userId = null;
