@@ -4,6 +4,7 @@ use Base;
 use Models\UserModel;
 use Services\AuthService;
 use Services\Http;
+use Services\Json;
 
 class AuthController {
   private UserModel $users;
@@ -12,7 +13,11 @@ class AuthController {
   }
 
   public function register() {
-    $input = json_decode(file_get_contents('php://input'), true) ?? [];
+    $input = Json::readBody();
+      if ($input === null) {
+          Http::badRequest('Invalid JSON payload');
+          return;
+      }
     $email = strtolower(trim($input['email'] ?? ''));
     $pass = (string)($input['password'] ?? '');
     
@@ -30,7 +35,11 @@ class AuthController {
   }
 
   public function login() {
-    $input = json_decode(file_get_contents('php://input'), true) ?? [];
+    $input = Json::readBody();
+    if ($input === null) {
+        Http::badRequest('Invalid JSON payload');
+        return;
+    }
     $email = strtolower(trim($input['email'] ?? ''));
     $pass = (string)($input['password'] ?? '');
     $row = (new UserModel(Base::instance()->get('DB')))->findByEmail($email);

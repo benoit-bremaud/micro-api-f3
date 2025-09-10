@@ -22,4 +22,10 @@ final class Http {
             'message' => $message
         ]);
     }
+
+    public static function badRequest(string $message='Bad request'): void {
+        http_response_code(400);
+        header('Content-Type: application/json');
+        echo json_encode(['error'=>'bad_request','message'=>$message]);
+    }
 }
