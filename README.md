@@ -79,6 +79,22 @@ Most useful commands for daily work are:
 
 👉 For advanced usage (utilities, project-only container listing, shortcuts like `make sh`, `make i`, etc.), check the [Makefile](./Makefile) at the root of the repository.
 
+## Database
+
+This project uses **SQLite** as its database engine.\
+SQLite is a lightweight, serverless database: everything is stored in a
+single file.
+
+* **Host (your PC)**: `./data/app.db`\
+* **PHP container**: `/var/www/html/data/app.db`
+
+The database file is persisted on your host machine through the mounted
+`data/` folder.\
+This makes it easy to inspect or back up.
+
+👉 For detailed usage instructions (interactive mode, handy one-liners,
+etc.), see the dedicated [data/README.md](./data/README.md).
+
 ## Troubleshooting
 
 * `Class 'Base' not found` → run `make install` (or `composer dump-autoload`)  
